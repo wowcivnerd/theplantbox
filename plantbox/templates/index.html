@@ -1,19 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Plant Box</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <nav>
-      <ul>
-          <li><a href="plants" >plants</a></li>
-          <li><a href="/" class="active">Home</a></li>
+{% extends 'layout.html' %}
+{% block content %}
+<br>
+<h1>Table of plants</h1>
+<table>
+    <tr>
 
-      </ul>  
-    </nav>
-</body>
-</html>
+
+        {%  for item in feedback  %}
+        <tr>
+            <td>{{  item[1]  }}</td>
+            <td>{{  item[2]  }}</td>
+            <td>
+                <form action="/delete" method="post">
+                    <button type="submit" class = "delete">
+                        <input type="hidden" name="ID" value="{{  item[0]  }}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {%  endfor  %}
+    </tr>
+
+</table>
+<br>
+<form action="/" method="post" class="w3-container w3-card-4 w3-grey">
+    <h2>Add a plant</h2>
+    <label>Name</label>
+    <input type="text" name="name">
+    <label>planted date</label>
+    <input type="text" name="planted_date">
+    <button type="submit">Submit</button>
+    </form>
+<br>
+
+
+{% endblock %}
