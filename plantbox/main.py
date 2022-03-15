@@ -23,20 +23,19 @@ def close_connection(exception):
 @app.get("/")
 def index():
     cursor = get_db().cursor()
-    sql = " SELECT name FROM plant"
+    sql = " SELECT ID,name,planted_date FROM plant"
     cursor.execute(sql)
-    feedback = cursor.fetchall
+    feedback = cursor.fetchall()
     return render_template("index.html", feedback=feedback) 
-    # change feedback to name that makes more sense depending on sql command seen above 
+
  
 @app.post('/')
 def index_post():
     cursor = get_db().cursor()
-    username = request.form['name_of_planter']
-    plant_name = request.form['plant_name']
-    planted_date = request.form['date_planted']
-    sql = " INSERT INTO plant(name, planted_date) VALUES(?.?)"
-    cursor.execute(sql,(plant_name,planted_date))
+    name = request.form['name']
+    planted_date = request.form['planted_date']
+    sql = " INSERT INTO plant(name, planted_date) VALUES(?,?)"
+    cursor.execute(sql,(name,planted_date))
     get_db().commit()
     return redirect(url_for("index"))
 
