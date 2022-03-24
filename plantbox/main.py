@@ -3,6 +3,7 @@ from flask import Flask, render_template, g, request, redirect, url_for
 import sqlite3
 
 
+# Path to database.
 DATABASE = "theplantbox.db"
 
 app=Flask(__name__)
