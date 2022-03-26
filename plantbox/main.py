@@ -41,5 +41,15 @@ def index_post():
     return redirect(url_for("index"))
 
 
+    
+@app.post('/delete')
+def delete_item_by_ID():
+    ID = request.form['ID']
+    cursor = get_db().cursor()
+    sql= "DELETE FROM Plant WHERE ID=?"
+    cursor.execute(sql,(ID,))
+    get_db().commit()
+    return redirect(url_for('index'))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)
