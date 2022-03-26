@@ -26,7 +26,20 @@ li a:hover {
 .active {
     background-color: rgb(0, 0, 0);
 }
+#plant_display {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: lightgray;
+}
+  
+#plant_display,th{
+    color: Black;
+    text-align: left;
+}
+#plant_display,td{
+    color: #222;
 
+}
 
 .delete{
     border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap
