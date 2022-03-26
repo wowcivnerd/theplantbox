@@ -4,8 +4,8 @@
 <h1>Data Test</h1>
 <table id="plant_display">
     <tr>
-        <th>Comment</th>
-        <th>Author</th>
+        <th>Plant</th>
+        <th>Date</th>
 
     </tr>
     <tr>
@@ -13,7 +13,7 @@
 
         {%  for item in feedback  %}
         <tr>
-            <td>{{  item[1]  }}</td>
+            <td><a href="seccondary">{{  item[1]  }}></a></td>
             <td>{{  item[2]  }}</td>
             <td>
                 <form action="/delete" method="post">

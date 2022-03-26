@@ -29,6 +29,10 @@ def index():
     feedback = cursor.fetchall()
     return render_template("index.html", feedback=feedback) 
 
+
+@app.get("/plant_info")
+def plant_info():
+    return render_template("plant_info.html")
  
 @app.post('/')
 def index_post():
@@ -41,7 +45,7 @@ def index_post():
     return redirect(url_for("index"))
 
 
-    
+
 @app.post('/delete')
 def delete_item_by_ID():
     ID = request.form['ID']
