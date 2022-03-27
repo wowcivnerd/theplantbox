@@ -34,6 +34,12 @@ def index():
 def plant_info():
     return render_template("plant_info.html")
  
+
+@app.get("/page/<slug>")
+def page(slug):
+    return "penis butt" + str(slug)
+    # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
+
 @app.post('/')
 def index_post():
     cursor = get_db().cursor()
