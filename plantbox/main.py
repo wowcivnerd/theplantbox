@@ -34,10 +34,10 @@ def index():
 @app.get("/page/<slug>")
 def page(slug):
     cursor = get_db().cursor()
-    sql = " SELECT * FROM plant WHERE slug = ?"
-    cursor.execute(sql,(slug))
+    sql = " SELECT * FROM page WHERE slug = ?"
+    cursor.execute(sql,(slug,))
     cursor.fetchone()
-    return render_template("plant_info.html")
+    return render_template("plant_info.html",slug=slug)
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
 
 @app.post('/')
