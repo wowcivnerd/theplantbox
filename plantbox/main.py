@@ -29,7 +29,17 @@ def index():
     feedback = cursor.fetchall()
     return render_template("index.html", feedback=feedback) 
 
+
+@app.get("/plant_info")
+def plant_info():
+    return render_template("plant_info.html")
  
+
+@app.get("/page/<slug>")
+def page(slug):
+    return "penis butt" + str(slug)
+    # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
+
 @app.post('/')
 def index_post():
     cursor = get_db().cursor()
@@ -40,6 +50,16 @@ def index_post():
     get_db().commit()
     return redirect(url_for("index"))
 
+
+
+@app.post('/delete')
+def delete_item_by_ID():
+    ID = request.form['ID']
+    cursor = get_db().cursor()
+    sql= "DELETE FROM Plant WHERE ID=?"
+    cursor.execute(sql,(ID,))
+    get_db().commit()
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)

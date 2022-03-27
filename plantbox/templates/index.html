@@ -1,19 +1,26 @@
 {% extends 'layout.html' %}
 {% block content %}
 <br>
-<h1>Table of plants</h1>
-<table>
+<h1>Data Test</h1>
+<table id="plant_display">
+    <tr>
+        <th>Plant</th>
+        <th>Date</th>
+
+    </tr>
     <tr>
 
 
         {%  for item in feedback  %}
         <tr>
-            <td>{{  item[1]  }}</td>
+            <td><a href="seccondary">{{  item[1]  }}></a></td>
             <td>{{  item[2]  }}</td>
             <td>
                 <form action="/delete" method="post">
-                    <button type="submit" class = "delete">
+                    <button type="submit" class = "w3-button">
+                        <i class="fa fa-trash"></i>
                         <input type="hidden" name="ID" value="{{  item[0]  }}">
+
                     </button>
                 </form>
             </td>
@@ -24,7 +31,7 @@
 </table>
 <br>
 <form action="/" method="post" class="w3-container w3-card-4 w3-grey">
-    <h2>Add a plant</h2>
+    <h2>Add a Plant</h2>
     <label>Name</label>
     <input type="text" name="name">
     <label>planted date</label>

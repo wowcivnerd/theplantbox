@@ -1,9 +1,12 @@
+nav {
+    background-color: #448852;
+}
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    /* background-color: #333; */
 }
   
 li {
@@ -20,13 +23,26 @@ li a {
   
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: #295131;
 
 }
 .active {
-    background-color: rgb(0, 0, 0);
+    background-color: #295131;
 }
+#plant_display {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: lightgray;
+}
+  
+#plant_display,th{
+    color: Black;
+    text-align: left;
+}
+#plant_display,td{
+    color: #222;
 
+}
 
 .delete{
     border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap
