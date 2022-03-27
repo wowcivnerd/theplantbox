@@ -29,15 +29,15 @@ def index():
     feedback = cursor.fetchall()
     return render_template("index.html", feedback=feedback) 
 
-
-@app.get("/plant_info")
-def plant_info():
-    return render_template("plant_info.html")
  
 
 @app.get("/page/<slug>")
 def page(slug):
-    return "penis butt" + str(slug)
+    cursor = get_db().cursor()
+    sql = " SELECT * FROM plant WHERE slug = ?"
+    cursor.execute(sql,(slug))
+    cursor.fetchone()
+    return render_template("plant_info.html")
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
 
 @app.post('/')
