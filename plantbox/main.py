@@ -41,7 +41,7 @@ def page(slug):
     cursor.execute(sql,(slug,))
     header = cursor.fetchone()
     print(content)
-    return render_template("plant_info.html",content=content,header=header)
+    return render_template("plant_info.html",content=content,slug=slug)
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
 
 
