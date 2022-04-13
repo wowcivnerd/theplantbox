@@ -34,14 +34,15 @@ def index():
 @app.get("/page/<slug>")
 def page(slug):
     cursor = get_db().cursor()
-    sql = " SELECT content FROM page WHERE slug = ?"
+    sql = " SELECT content FROM Plant_page WHERE Slug = ?"
     cursor.execute(sql,(slug,))
     content = cursor.fetchone()
-    sql = "SELECT title FROM page WHERE slug = ?"
+    sql = "SELECT title FROM Plant_page WHERE Slug = ?"
     cursor.execute(sql,(slug,))
     header = cursor.fetchone()
-    print(content)
-    return render_template("plant_info.html",content=content,slug=slug)
+    slug_link = "/page" + slug
+    print (slug_link)
+    return render_template("plant_info.html",content=content,slug=slug,slug_link=slug_link)
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
 
 
@@ -51,8 +52,9 @@ def index_post():
     cursor = get_db().cursor()
     name = request.form['name']
     planted_date = request.form['planted_date']
-    sql = " INSERT INTO plant(name, planted_date) VALUES(?,?)"
-    cursor.execute(sql,(name,planted_date))
+    plant = request.form['plants']
+    sql = " INSERT INTO plant(name, planted_date, plant_type) VALUES(?,?,?)"
+    cursor.execute(sql,(name,planted_date,plant))
     get_db().commit()
     return redirect(url_for("index"))
 
