@@ -5,7 +5,7 @@
 <table id="plant_display">
     <tr>
         <th>Plant</th>
-        <th>Date</th>
+        <th>Plant-type</th>
 
     </tr>
     <tr>
@@ -13,7 +13,7 @@
 
         {%  for item in feedback  %}
         <tr>
-            <td><a href="/plant/{{slug}}" >{{  item[1]  }}></a></td>
+            <td><a href="/plant/" >{{  item[1]  }}></a></td>
             <td>{{  item[2]  }}</td>
             <td>
                 <form action="/delete" method="post">
@@ -38,12 +38,10 @@
     <input type="text" name="planted_date">
     <label for="plant-select">Choose a plant</label>
     <select name="plants" id="plant-selection">
-       <option value="" selected>--Please choose an option--</option>
-       <option value=1>Strawberry</option>
-        <option value=2>Raspberry</option>
-        <option value=3>Eggplant</option>
-        <option value=4>Watermelon</option>
-
+        <option value="" selected>--Please choose an option--</option>
+        {%  for item in plant_type_list  %}
+        <option value="{{  item[0]  }}" >  {{item[1]}}  </option>
+        {%  endfor  %}
     </select>
 
     <button type="submit">Submit</button>

@@ -2,6 +2,8 @@ from importlib.abc import TraversableResources
 from flask import Flask, render_template, g, request, redirect, url_for
 import sqlite3
 
+# from matplotlib.pyplot import title
+
 
 # Path to database.
 DATABASE = "theplantbox.db"
@@ -24,25 +26,27 @@ def close_connection(exception):
 @app.get("/")
 def index():
     cursor = get_db().cursor()
-    sql = " SELECT ID,name,planted_date FROM plant"
+    sql = " SELECT ID,name FROM plant"
     cursor.execute(sql)
     feedback = cursor.fetchall()
-    return render_template("index.html", feedback=feedback) 
+    sql = " SELECT ID,name FROM plant_type "
+    cursor.execute(sql)
+    plant_type_list = cursor.fetchall()
+    return render_template("index.html", feedback=feedback, plant_type_list=plant_type_list) 
 
  
 
 @app.get("/page/<slug>")
 def page(slug):
     cursor = get_db().cursor()
-    sql = " SELECT content FROM Plant_page WHERE Slug = ?"
+    sql = " SELECT content FROM plant_type WHERE Slug = ?"
     cursor.execute(sql,(slug,))
     content = cursor.fetchone()
-    sql = "SELECT title FROM Plant_page WHERE Slug = ?"
+    sql = "SELECT title FROM plant_type WHERE Slug = ?"
     cursor.execute(sql,(slug,))
-    header = cursor.fetchone()
+    title = cursor.fetchone()
     slug_link = "/page" + slug
-    print (slug_link)
-    return render_template("plant_info.html",content=content,slug=slug,slug_link=slug_link)
+    return render_template("plant_info.html",content=content,slug=slug,title=title)
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
 
 
