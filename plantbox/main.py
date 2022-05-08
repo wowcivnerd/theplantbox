@@ -25,6 +25,12 @@ def close_connection(exception):
 
 @app.get("/")
 def index():
+    return render_template("index.html")
+
+
+
+@app.get("/portfolio")
+def portfolio():
     cursor = get_db().cursor()
     sql = " SELECT ID,name FROM plant"
     cursor.execute(sql)
@@ -32,7 +38,7 @@ def index():
     sql = " SELECT ID,name FROM plant_type "
     cursor.execute(sql)
     plant_type_list = cursor.fetchall()
-    return render_template("index.html", feedback=feedback, plant_type_list=plant_type_list) 
+    return render_template("user-portfolio.html", feedback=feedback, plant_type_list=plant_type_list) 
 
  
 
@@ -60,7 +66,7 @@ def index_post():
     sql = " INSERT INTO plant(name, planted_date, plant_type) VALUES(?,?,?)"
     cursor.execute(sql,(name,planted_date,plant))
     get_db().commit()
-    return redirect(url_for("index"))
+    return redirect(url_for("portfolio"))
 
 
 
@@ -71,7 +77,7 @@ def delete_item_by_ID():
     sql= "DELETE FROM Plant WHERE ID=?"
     cursor.execute(sql,(ID,))
     get_db().commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('portfolio'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)

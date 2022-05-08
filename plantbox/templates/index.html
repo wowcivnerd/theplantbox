@@ -1,52 +1,38 @@
-{% extends 'layout.html' %}
-{% block content %}
-<br>
-<h1>Data Test</h1>
-<table id="plant_display">
-    <tr>
-        <th>Plant</th>
-        <th>Plant-type</th>
-
-    </tr>
-    <tr>
+{%  extends 'layout.html'  %}
+{%  block content  %}
 
 
-        {%  for item in feedback  %}
-        <tr>
-            <td><a href="/plant/" >{{  item[1]  }}></a></td>
-            <td>{{  item[2]  }}</td>
-            <td>
-                <form action="/delete" method="post">
-                    <button type="submit" class = "w3-button">
-                        <i class="fa fa-trash"></i>
-                        <input type="hidden" name="ID" value="{{  item[0]  }}">
-
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {%  endfor  %}
-    </tr>
-
-</table>
-<br>
-<form action="/" method="post" class="w3-container w3-card-4 w3-grey">
-    <h2>Add a Plant</h2>
-    <label>Name</label>
-    <input type="text" name="name">
-    <label>planted date</label>
-    <input type="text" name="planted_date">
-    <label for="plant-select">Choose a plant</label>
-    <select name="plants" id="plant-selection">
-        <option value="" selected>--Please choose an option--</option>
-        {%  for item in plant_type_list  %}
-        <option value="{{  item[0]  }}" >  {{item[1]}}  </option>
-        {%  endfor  %}
-    </select>
-
-    <button type="submit">Submit</button>
-    </form>
-<br>
+<div class="hero-image" height="300px">
+    <img src="/static/images/test-carousel1.jpg" height="auto" width="100%"  alt="">
+</div>
 
 
-{% endblock %}
+
+
+<div class="content">
+    <div class="left-split" style="float:left" >
+        <img src="/static/images/test-image1.jpg" width="100%" height="auto" >
+    </div>
+    <div class="right-split" style="float: right; width: 48%;">
+        <div class="text" style="width: 100%; margin: 1%;">
+            a big section of text a big section of text oh wait its now a large section of text :0 I need to keep writing for some reason. stupid testing
+        </div>
+        </div>
+    <br style="clear:both;"/>
+</div>
+
+
+<div class="content2">
+    <div class="left-split" style="float:right" >
+        <img src="/static/images/test-image1.jpg" width="100%%" height="auto" >
+    </div>
+    <div class="right-split" style="float: left; width: 48%;">
+        <div class="text" style="width: 100%; margin: 1%;">
+            a big section of text a big section of text oh wait its now a large section of text :0 I need to keep writing for some reason. stupid testing
+        </div>
+        </div>
+    <br style="clear:both;"/>
+
+</div>
+
+{%  endblock  %}

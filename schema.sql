@@ -18,7 +18,8 @@ INSERT INTO plant_type VALUES (NULL, 'Potato', 'potato', 'content of spring onio
 INSERT INTO plant_type VALUES (NULL, 'Cauliflower', 'cauliflower', 'content of spring onion');
 INSERT INTO plant_type VALUES (NULL, 'Carrot', 'carrot', 'content of spring onion');
 INSERT INTO plant_type VALUES (NULL, 'Raspberry', 'raspberry', 'content of spring onion');
-INSERT INTO plant_type VALUES (NULL, 'Srawberry', 'strawberry', 'content of spring onion');
+INSERT INTO plant_type VALUES (NULL, 'Strawberry', 'strawberry', 'content of spring onion');
+INSERT INTO plant_type VALUES (NULL, 'Owen', 'owen', 'content of owen');
 
 INSERT INTO plant VALUES (NULL, 'Spring onions porch', 1, 1, 2022-04-01);
 

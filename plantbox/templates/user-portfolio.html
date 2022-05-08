@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block content %}
+<br>
+<h1>Data Test</h1>
+<table id="plant_display">
+    <tr>
+        <th>Plant</th>
+        <th>Plant-type</th>
+
+    </tr>
+    <tr>
+
+
+        {%  for item in feedback  %}
+        <tr>
+            <td><a href="/plant/" >{{  item[1]  }}></a></td>
+            <td>{{  item[2]  }}</td>
+            <td>
+                <form action="/delete" method="post">
+                    <button type="submit" class = "w3-button">
+                        <i class="fa fa-trash"></i>
+                        <input type="hidden" name="ID" value="{{  item[0]  }}">
+
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {%  endfor  %}
+    </tr>
+
+</table>
+<br>
+<form action="/" method="post" class="w3-container w3-card-4 w3-grey">
+    <h2>Add a Plant</h2>
+    <label>Name</label>
+    <input type="text" name="name">
+    <label>planted date</label>
+    <input type="text" name="planted_date">
+    <label for="plant-select">Choose a plant</label>
+    <select name="plants" id="plant-selection">
+        <option value="" selected>--Please choose an option--</option>
+        {%  for item in plant_type_list  %}
+        <option value="{{  item[0]  }}" >  {{item[1]}}  </option>
+        {%  endfor  %}
+    </select>
+
+    <button type="submit">Submit</button>
+    </form>
+<br>
+
+
+{% endblock %}
