@@ -1,7 +1,6 @@
 from importlib.abc import TraversableResources
 from flask import Flask, render_template, g, request, redirect, url_for
 import sqlite3
-
 # from matplotlib.pyplot import title
 
 
@@ -28,6 +27,10 @@ def index():
     return render_template("index.html")
 
 
+@app.get("/bootstrap")
+def bootstrap():
+    return render_template("hamburger.html")
+
 
 @app.get("/portfolio")
 def portfolio():
@@ -41,7 +44,7 @@ def portfolio():
     return render_template("user-portfolio.html", feedback=feedback, plant_type_list=plant_type_list) 
 
  
-
+# doesnt work now because of lacking title colllumn in SQLite 
 @app.get("/page/<slug>")
 def page(slug):
     cursor = get_db().cursor()

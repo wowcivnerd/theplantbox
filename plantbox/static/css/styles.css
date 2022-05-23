@@ -1,5 +1,7 @@
-nav {
-    background-color: #448852;
+
+body {
+    background-color: #010E05;
+    color: white;
 }
 ul {
     list-style-type: none;
@@ -27,8 +29,24 @@ li a:hover {
 
 }
 .active {
-    background-color: #295131;
+    color: grey;
 }
+
+
+.bg-light {
+    background-color: #0A5711 !important;
+}
+
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+
 #plant_display {
     border-collapse: collapse;
     width: 100%;
@@ -58,8 +76,7 @@ footer{
 
 
 .content {
-background-color: rgb(10, 98, 4);
-
+    font-family: sans-serif;
 }
 
 
@@ -67,6 +84,8 @@ background-color: rgb(10, 98, 4);
     width: 48%;
     margin: 1%;
 }
+
+
 .hero-image {
    display: block; 
    margin-left: auto;
