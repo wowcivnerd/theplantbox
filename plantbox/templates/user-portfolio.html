@@ -11,15 +11,15 @@
     <tr>
 
 
-        {%  for item in feedback  %}
+        {%  for item in plants  %}
         <tr>
-            <td><a href="/plant/" >{{  item[1]  }}></a></td>
-            <td>{{  item[2]  }}</td>
+            <td><a href="/page/{{ item['slug'] }}">{{  item['nickname']  }}></a></td>
+            <td>{{  item['plant_name']  }}</td>
             <td>
                 <form action="/delete" method="post">
                     <button type="submit" class = "w3-button">
                         <i class="fa fa-trash"></i>
-                        <input type="hidden" name="ID" value="{{  item[0]  }}">
+                        <input type="hidden" name="ID" value="{{  item['ID']  }}">
 
                     </button>
                 </form>
@@ -40,7 +40,7 @@
     <select name="plants" id="plant-selection">
         <option value="" selected>--Please choose an option--</option>
         {%  for item in plant_type_list  %}
-        <option value="{{  item[0]  }}" >  {{item[1]}}  </option>
+        <option value="{{  item['ID']  }}" >  {{item['name']}}  </option>
         {%  endfor  %}
     </select>
 

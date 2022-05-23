@@ -17,6 +17,7 @@ def get_db():
     return db
 
 
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -34,24 +35,26 @@ def bootstrap():
 
 @app.get("/portfolio")
 def portfolio():
-    cursor = get_db().cursor()
-    sql = " SELECT ID,name FROM plant"
+    db = get_db()
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    sql = " SELECT plant.ID, plant.name as nickname, plant_type.name as plant_name, plant_type.slug FROM plant LEFT JOIN plant_type ON plant.plant_type = plant_type.ID;"
     cursor.execute(sql)
-    feedback = cursor.fetchall()
+    plants = cursor.fetchall()
     sql = " SELECT ID,name FROM plant_type "
     cursor.execute(sql)
     plant_type_list = cursor.fetchall()
-    return render_template("user-portfolio.html", feedback=feedback, plant_type_list=plant_type_list) 
+    return render_template("user-portfolio.html", plants=plants, plant_type_list=plant_type_list) 
 
  
 # doesnt work now because of lacking title colllumn in SQLite 
 @app.get("/page/<slug>")
 def page(slug):
     cursor = get_db().cursor()
-    sql = " SELECT content FROM plant_type WHERE Slug = ?"
+    sql = " SELECT content FROM plant_type WHERE slug = ?"
     cursor.execute(sql,(slug,))
     content = cursor.fetchone()
-    sql = "SELECT title FROM plant_type WHERE Slug = ?"
+    sql = "SELECT title FROM plant_type WHERE slug = ?"
     cursor.execute(sql,(slug,))
     title = cursor.fetchone()
     slug_link = "/page" + slug
