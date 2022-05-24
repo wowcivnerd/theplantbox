@@ -28,9 +28,7 @@ def index():
     return render_template("index.html")
 
 
-@app.get("/bootstrap")
-def bootstrap():
-    return render_template("hamburger.html")
+
 
 
 @app.get("/portfolio")

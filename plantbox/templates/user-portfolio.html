@@ -13,8 +13,10 @@
 
         {%  for item in plants  %}
         <tr>
-            <td><a href="/page/{{ item['slug'] }}">{{  item['nickname']  }}></a></td>
-            <td>{{  item['plant_name']  }}</td>
+            <td>{{  item['nickname']  }}</td>
+            <td>
+                <a href="/page/{{ item['slug'] }}">{{  item['plant_name']  }}</a>
+            </td>
             <td>
                 <form action="/delete" method="post">
                     <button type="submit" class = "w3-button">
