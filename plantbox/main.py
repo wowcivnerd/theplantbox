@@ -1,5 +1,6 @@
+from contextlib import nullcontext
 from importlib.abc import TraversableResources
-from flask import Flask, render_template, g, request, redirect, url_for
+from flask import Blueprint, Flask, render_template, g, request, redirect, url_for
 import sqlite3
 # from matplotlib.pyplot import title
 
@@ -8,6 +9,16 @@ import sqlite3
 DATABASE = "theplantbox.db"
 
 app=Flask(__name__)
+
+
+
+def convertTuple(tup):
+    str = ''
+    for item in tup:
+        str = str + item
+    return str
+
+
 
 
 def get_db():
@@ -22,6 +33,23 @@ def get_db():
 def close_connection(exception):
     db = getattr(g, '_database', None)
 
+
+# route to handle login-page
+@app.route('/login',methods=['GET','POST'])
+def login():
+    error = None
+    cursor = get_db().cursor()
+    sql = "SELECT ID FROM user WHERE username = ?"
+    cursor.execute(sql,(request.form['username'],))
+     
+    # if request.method == 'POST':
+    #     if request.form['username']:
+    #     # if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+    #     #     error = 'invalid credentials please try again'
+    #     else:
+    #         return redirect(url_for('index'))
+    get_db().commit()
+    return render_template('login.html', error=error)
 
 @app.get("/")
 def index():
@@ -44,6 +72,10 @@ def portfolio():
     plant_type_list = cursor.fetchall()
     return render_template("user-portfolio.html", plants=plants, plant_type_list=plant_type_list) 
 
+
+@app.get("/contact")
+def contact_page():
+    return render_template("contact.html")
  
 # doesnt work now because of lacking title colllumn in SQLite 
 @app.get("/page/<slug>")
@@ -55,9 +87,27 @@ def page(slug):
     sql = "SELECT title FROM plant_type WHERE slug = ?"
     cursor.execute(sql,(slug,))
     title = cursor.fetchone()
+    sql = "Select slug FROM plant_type"
+    cursor.execute(sql)
+    sql_slug_list = cursor.fetchall()
+    slug_list = [""]
+
+    for i in sql_slug_list:
+        print (i)
+        slug_list.append(convertTuple(i))
+        print(slug_list)
+
+ #making it append(add) to the slug_list so I can compare sluglist and improper input to fix blackies comment on documentation
+
+
     slug_link = "/page" + slug
+    # if slug != 
     return render_template("plant_info.html",content=content,slug=slug,title=title)
     # sql shite sql = "SELECT * FROM Page WHERE slug = (slug) VALUES(?,)"  and also feedback = feedback
+
+@app.get("/page/None")
+def pageNone():
+    return render_template("no-plant.html")
 
 
 
@@ -66,6 +116,8 @@ def index_post():
     cursor = get_db().cursor()
     name = request.form['name']
     planted_date = request.form['planted_date']
+    if request.form['plants'] == "":
+        return redirect(url_for("home"))
     plant = request.form['plants']
     sql = " INSERT INTO plant(name, planted_date, plant_type) VALUES(?,?,?)"
     cursor.execute(sql,(name,planted_date,plant))
