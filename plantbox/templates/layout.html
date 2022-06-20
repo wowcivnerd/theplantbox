@@ -25,10 +25,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/portfolio">portfolio</a>
-          <a class="nav-link" href="/contact">Contact    </a>
-          <a class="nav-link" href="#">                  </a>
+          {%  if active_link == 0:  %}
+          <a class="active-nav-link" href="/">Home</a>
+          {%  else:  %}
+          <a class="nav-link" href="/">Home</a> 
+          {%  endif  %}
+          <a class="nav-link" href="/portfolio">User Portfolio</a>
+          <a class="nav-link" href="/contact">Contact us      </a>
+          <a class="nav-link" href="/about">About us          </a>
+          <a class="nav-link" href="/signup"> Sign up         </a>
         </div>
       </div>
     </div>
@@ -41,6 +46,7 @@
     <!-- <footer>
         <p>
         Favicon from https://www.freeiconspng.com/img/34788
+        Image by <a href="https://pixabay.com/users/congerdesign-509903/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">congerdesign</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">Pixabay</a>
         </p>
     </footer> -->
 </body>

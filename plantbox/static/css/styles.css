@@ -1,8 +1,12 @@
 
+
+/* CSS that doesn't change depending on screen size  */
 body {
     background-color: #010E05;
     color: white;
 }
+
+/* Navbar */
 ul {
     list-style-type: none;
     margin: 0;
@@ -10,11 +14,14 @@ ul {
     overflow: hidden;
     /* background-color: #333; */
 }
-  
-li {
+.nav-link {
     float: right;
 }
-  
+
+a {
+    text-decoration: none;
+}
+
 li a {
     display: block;
     color: white;
@@ -23,7 +30,7 @@ li a {
     text-decoration: none;
 }
   
-/* Change the link color to X on hover */
+/* Change the list item link color to X on hover */
 li a:hover {
     background-color: #295131;
 
@@ -32,7 +39,6 @@ li a:hover {
     color: grey;
 }
 
-
 .bg-light {
     background-color: #0A5711 !important;
 }
@@ -40,11 +46,11 @@ li a:hover {
 
 .nav-link {
     color: black;
+    padding: 0%;
 }
 
-.nav-link:hover {
-    color: white;
-}
+.nav-link:hover, .active-nav-link {
+    color: lightgray !important;}
 
 
 #plant_display {
@@ -85,14 +91,88 @@ footer{
     margin: 1%;
 }
 
-
+.top-home-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .hero-image {
-   display: block; 
-   margin-left: auto;
-   margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin: 0% 50% 0% 50%;
+   /* margin-left: auto;
+   margin-right: auto; */
    width: 50%;
 }
 
 .displaying-error {
     margin: 10% 30% 0 30%;
 }
+
+
+.CTA {
+    list-style-type:circle;
+    
+}
+
+.CTA-list {
+    list-style-type: disc;
+    list-style-type: disc;
+    overflow: visible;
+    padding: 0;
+}
+
+.CTA-link {
+    text-decoration: underline;
+    color: G;
+}
+
+/* About Us page*/
+.about-text {
+    display: flex; 
+    text-align: center;
+    flex-direction: column;
+}
+.about-us-goal {
+    text-align: center;
+    max-width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.about-us-profile {
+    text-align: center;
+    max-width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.about-us-profile-image {
+    border-radius: 50%;
+    max-width: 100px;
+    max-height: auto;
+}
+
+
+input {
+    width: 100%;
+}
+
+
+
+/* CSS for most Mobile phones */
+
+@media only screen and (max-width: 640) {
+
+    
+}
+
+
+
+
+@media only screen and (min-width: 641px) {
+    body {
+        background-color: lightblue;
+    }
+}
+
+

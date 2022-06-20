@@ -1,5 +1,6 @@
 from contextlib import nullcontext
 from importlib.abc import TraversableResources
+import re
 from flask import Blueprint, Flask, render_template, g, request, redirect, url_for
 import sqlite3
 # from matplotlib.pyplot import title
@@ -12,11 +13,7 @@ app=Flask(__name__)
 
 
 
-def convertTuple(tup):
-    str = ''
-    for item in tup:
-        str = str + item
-    return str
+
 
 
 
@@ -34,29 +31,17 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
 
 
-# route to handle login-page
-@app.route('/login',methods=['GET','POST'])
-def login():
-    error = None
-    cursor = get_db().cursor()
-    sql = "SELECT ID FROM user WHERE username = ?"
-    cursor.execute(sql,(request.form['username'],))
-     
-    # if request.method == 'POST':
-    #     if request.form['username']:
-    #     # if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-    #     #     error = 'invalid credentials please try again'
-    #     else:
-    #         return redirect(url_for('index'))
-    get_db().commit()
-    return render_template('login.html', error=error)
+
 
 @app.get("/")
 def index():
-    return render_template("index.html")
+    active_link = 0
+    return render_template("index.html",active_link = active_link)
 
 
-
+@app.get("/signup")
+def signup():
+    return render_template("signup.html")
 
 
 @app.get("/portfolio")
@@ -73,10 +58,24 @@ def portfolio():
     return render_template("user-portfolio.html", plants=plants, plant_type_list=plant_type_list) 
 
 
+
 @app.get("/contact")
 def contact_page():
     return render_template("contact.html")
+
+
+@app.get("/about")
+def about_us():
+    return render_template("about.html")
  
+
+
+@app.get("/starting-out")
+def starting_page():
+    return render_template("index.html")
+
+
+
 # doesnt work now because of lacking title colllumn in SQLite 
 @app.get("/page/<slug>")
 def page(slug):
@@ -94,7 +93,6 @@ def page(slug):
 
     for i in sql_slug_list:
         print (i)
-        slug_list.append(convertTuple(i))
         print(slug_list)
 
  #making it append(add) to the slug_list so I can compare sluglist and improper input to fix blackies comment on documentation
@@ -137,3 +135,5 @@ def delete_item_by_ID():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)
+
+
