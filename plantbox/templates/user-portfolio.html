@@ -1,6 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
 <br>
+
+{%  if session['name']  %}
+<h1>hello {{ session['name']  }} </h1>
+{%  else:  %}
+<h1> it works but session no longer </h1>
+{%  endif  %}
 <h1>Data Test</h1>
 <table id="plant_display">
     <tr>

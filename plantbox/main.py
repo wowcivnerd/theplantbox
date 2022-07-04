@@ -1,7 +1,8 @@
 from contextlib import nullcontext
 from importlib.abc import TraversableResources
-import re
-from flask import Blueprint, Flask, render_template, g, request, redirect, url_for
+import hashlib
+from unicodedata import name
+from flask import Blueprint, Flask, render_template, g, request, redirect, url_for, session, render_template_string
 import sqlite3
 # from matplotlib.pyplot import title
 
@@ -10,6 +11,7 @@ import sqlite3
 DATABASE = "theplantbox.db"
 
 app=Flask(__name__)
+app.secret_key = "boobs"
 
 
 
@@ -36,12 +38,38 @@ def close_connection(exception):
 @app.get("/")
 def index():
     active_link = 0
+    print("I'm in!!" + session['name'])
     return render_template("index.html",active_link = active_link)
 
 
-@app.get("/signup")
+@app.route("/signup", methods=['GET','POST'])
 def signup():
-    return render_template("signup.html")
+    if request.method == 'POST':
+        #saves form data
+        session['email'] = request.form['email_address']
+        session['name'] = request.form['name_form']
+        if request.form['password'] == request.form['password_confirm']:
+            session['password'] = request.form['password']
+            return redirect(url_for('index'))
+        else:
+            session.pop('email', default=None)
+            session.pop('name', default=None)
+            session.pop('password', default=None)
+            return redirect(url_for("signup"))
+    return """
+        <form method="post">
+            <label for="email">Enter your email address:</label>
+            <input type="email" id="email" name="email_address" required />
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name_form" required />
+            <label for="password">Enter your password:</label>
+            <input type="password" id="password" name="password" required />
+            <label for="repassword">Re-enter your password:</label>
+            <input type="password" id="repassword" name="password_confirm" required />
+            <button type="submit">Submit</button
+        </form>
+        """
+
 
 
 @app.get("/portfolio")
