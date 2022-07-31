@@ -1,6 +1,7 @@
 from contextlib import nullcontext
 from importlib.abc import TraversableResources
 import hashlib
+from pickle import GET
 from unicodedata import name
 from flask import Blueprint, Flask, render_template, g, request, redirect, url_for, session, render_template_string
 import sqlite3
@@ -37,19 +38,38 @@ def close_connection(exception):
 
 @app.get("/")
 def index():
-    active_link = 0
-    print("I'm in!!" + session['name'])
-    return render_template("index.html",active_link = active_link)
+    return render_template("index.html")
+
+@app.route("/signin",method=['GET','POST'])
+def signin():
+    if request.method == 'POST':
+        #need to write
+        print("hello")
+        #to stop errors
+    return render_template("signin.html")
 
 
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
         #saves form data
-        session['email'] = request.form['email_address']
-        session['name'] = request.form['name_form']
+        user_email = request.form['email_address']
+        user_password = request.form['password']
+        db=get_db()
+        db.row_factory = sqlite3.Row
+        cursor = db.cursor()
+        sql = " SELECT id FROM user WHERE email = ? AND password = ?"
+        cursor.execute(sql,(user_email,user_password,))
+        password_check = cursor.fetchall()
+        print(password_check)
+        # ERROR!!!!!!!
+        # NOT PRINTING "password"
+        #Instead printing "[<sqlite3.Row object at 0x000001EFCA7A5E10>]" in terminal
         if request.form['password'] == request.form['password_confirm']:
             session['password'] = request.form['password']
+
+            # sql = "INSERT INTO user(username, name, password,email) VALUES(?,?,?,?)"
+            # cursor.execute(sql,())
             return redirect(url_for('index'))
         else:
             session.pop('email', default=None)
@@ -100,7 +120,7 @@ def about_us():
 
 @app.get("/starting-out")
 def starting_page():
-    return render_template("index.html")
+    return render_template("startout.html")
 
 
 
@@ -163,5 +183,3 @@ def delete_item_by_ID():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)
-
-
