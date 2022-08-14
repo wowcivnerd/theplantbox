@@ -5,6 +5,9 @@ body {
     background-color: #010E05;
     color: white;
 }
+.error_msg {
+    color: red;
+}
 
 /* Navbar */
 ul {

@@ -2,12 +2,14 @@
 {% block content %}
 <br>
 
-{%  if session['name']  %}
+{%  if logged_in:  %}
 <h1>Hello {{ session['name']  }} </h1>
+<h1>your plants:</h1>
+
 {%  else:  %}
-<h1> it works but session no longer </h1>
+<h1> You are not signed in  </h1>
+<h1>Example of plants:</h1>
 {%  endif  %}
-<h1>Your plants:</h1>
 <table id="plant_display">
     <tr>
         <th>Plant</th>

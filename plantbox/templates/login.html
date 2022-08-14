@@ -1,0 +1,15 @@
+{%  extends 'layout.html'  %}
+{% block content %}
+<h2>Log in </h2>
+<form method="post">
+    <label for="email">Enter your email address:</label>
+    <input type="email" id="email" name="email_address" required />
+    <label for="password">Enter your password:</label>
+    <input type="password" id="password" name="password" required />
+    <button type="submit">Submit</button>
+</form>
+<p>Don't have an account? <a href="/signup"><u>signup</u></a></p>
+{%  if incorrect_creds:  %}
+<p class="error_msg">Incorrect username or password, please try again.</p>
+{%  endif  %}
+{%  endblock  %}
