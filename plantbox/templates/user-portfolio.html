@@ -5,11 +5,6 @@
 {%  if logged_in:  %}
 <h1>Hello {{ session['name']  }} </h1>
 <h1>your plants:</h1>
-
-{%  else:  %}
-<h1> You are not signed in  </h1>
-<h1>Example of plants:</h1>
-{%  endif  %}
 <table id="plant_display">
     <tr>
         <th>Plant</th>
@@ -37,6 +32,52 @@
         </tr>
         {%  endfor  %}
     </tr>
+{%  else:  %}
+<h1> You are not signed in  </h1>
+<h1>Example of plants:</h1>
+<table id="plant_display">
+    <tr>
+        <th>Plant</th>
+        <th>Plant-type</th>
+
+    </tr>
+    <tr>
+
+        <tr>
+            <td> Carrots-front-porch</td>
+            <td>
+                <a href="/page/carrot"> Carrot</a>
+            </td>
+
+            <td>
+                <form action="/delete" method="post">
+                    <button type="submit" class = "w3-button">
+                        <i class="fa fa-trash"></i>
+                        <input type="hidden" name="ID" value="#">
+
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td> Potatoes-back-garden</td>
+            <td>
+                <a href="/page/potato"> potato</a>
+            </td>
+            <td>
+                <form action="/delete" method="post">
+                    <button type="submit" class = "w3-button">
+                        <i class="fa fa-trash"></i>
+                        <input type="hidden" name="ID" value="#">
+
+                    </button>
+            </form>
+            </td>
+        </tr>
+
+    </tr>
+{%  endif  %}
+
 
 </table>
 <br>

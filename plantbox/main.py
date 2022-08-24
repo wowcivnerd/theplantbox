@@ -7,7 +7,7 @@ from types import NoneType
 from unicodedata import name
 from flask import Blueprint, Flask, render_template, g, request, redirect, url_for, session, render_template_string
 import sqlite3
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash,generate_password_hash    #FIX THE HASH 
 #https://techmonger.github.io/4/secure-passwords-werkzeug/  NEED TO HASH ALL PASSWORDS
 
 
@@ -99,7 +99,7 @@ def signup():
             cursor.execute(sql,(user_email,user_password,))
             result = cursor.fetchall()
             try:
-                session['id'] = result[0]
+                session['id'] = result[0]['id']
                 print("cursor executed")
             except:
                 print("No session ID")
@@ -113,6 +113,14 @@ def signup():
     return render_template("sign-up.html")
 
 
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    logged_in = False
+    return redirect(url_for('index'))
+
+    
 
 @app.get("/portfolio")
 def portfolio():
@@ -229,6 +237,14 @@ def delete_item_by_ID():
     cursor.execute(sql,(ID,))
     get_db().commit()
     return redirect(url_for('portfolio'))
+
+
+
+
+@app.errorhandler(404)
+def error_404(error):
+    return render_template('error404.html',error=error), 404
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8008,debug=True)

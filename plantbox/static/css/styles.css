@@ -105,7 +105,7 @@ footer{
     margin: 0% 50% 0% 50%;
    /* margin-left: auto;
    margin-right: auto; */
-   width: 50%;
+
 }
 
 .displaying-error {
@@ -151,8 +151,10 @@ footer{
 
 .about-us-profile-image {
     border-radius: 50%;
-    max-width: 100px;
-    max-height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 
@@ -164,18 +166,81 @@ input {
 
 /* CSS for most Mobile phones */
 
-@media only screen and (max-width: 640) {
+@media only screen and (max-width: 650px) {
 
-    
-}
-
-
-
-
-@media only screen and (min-width: 641px) {
-    body {
-        background-color: lightblue;
+    .image-hero-image {
+        width: 15rem !important;
     }
+    p {
+        font-size: x-small;
+    }
+
+    /* Sign-up/log-in */
+
+    .login-signup-change {
+        font-size: large;
+    }
+    .error_msg {
+        font-size: large;
+    }
+
+    /* About page */
+    
+    .about-us-goal h2 {
+        font-size: xx-large;
+    }
+
+    .about-us-goal p {
+        font-size:larger;
+    }
+    .about-us-profile-image {
+        width: 100%;
+        height: auto;
+    }
+    .about-us-profile h4 {
+        font-size: x-large;
+    }
+    .about-us-profile h6 {
+        font-size: large;
+    }
+    .about-us-profile p { 
+        font-size:medium;
+    }
+
+
+
+   
+
 }
+
+
+
+
+@media only screen and (min-width: 651px) {
+    /* home page */
+    .image-hero-image {
+        width: 40rem !important;
+    }
+    .CTA h4 {
+        font-size: xx-large;
+        margin-top: 3rem;
+    }
+    .CTA-link {
+        font-size: xx-large;
+    
+    }
+    p {
+        font-size: xx-large;
+        text-align: center;
+        padding-top: 5rem;
+    }
+    .CTA-list {
+        font-size: x-large;
+        padding-top: 5rem;
+    }
+
+
+
+} 
 
 
