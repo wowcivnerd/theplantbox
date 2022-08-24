@@ -32,6 +32,27 @@
         </tr>
         {%  endfor  %}
     </tr>
+</table>
+<br>
+<form action="/" method="post" class="w3-container w3-card-4 w3-grey">
+    <h2>Add a Plantling</h2>
+    <div></div>
+    <label>Name of plantling</label>
+    <input placeholder='E.g "Strawberry row 1"' type="text" name="name" required>
+    <label>planted date</label>
+    <input placeholder="DD/MM/YYYY" type="text" name="planted_date" required>
+    <label for="plant-select">Choose a plant</label>
+    <!-- <label for="plants">Please select an option</label> -->
+    <select name="plants" id="plant-selection" required>
+        <option value=""  selected disabled hidden>--Please select an option--</option>
+        {%  for item in plant_type_list  %}
+        <option value="{{  item['ID']  }}" >  {{item['name']}}  </option>
+        {%  endfor  %}
+    </select>
+    
+    <button type="submit">Submit</button>
+    </form>
+<br>
 {%  else:  %}
 <h1> You are not signed in  </h1>
 <h1>Example of plants:</h1>
@@ -76,21 +97,22 @@
         </tr>
 
     </tr>
-{%  endif  %}
+
 
 
 </table>
 <br>
 <form action="/" method="post" class="w3-container w3-card-4 w3-grey">
     <h2>Add a Plantling</h2>
+    <h6 class="error_msg">Adding your own plants are currently disabled because you are not signed in</h6>
     <div></div>
     <label>Name of plantling</label>
-    <input placeholder='E.g "Strawberry row 1"' type="text" name="name" required>
+    <input placeholder='E.g "Strawberry row 1"' type="text" name="name" disabled>
     <label>planted date</label>
-    <input placeholder="DD/MM/YYYY" type="text" name="planted_date" required>
+    <input placeholder="DD/MM/YYYY" type="text" name="planted_date" disabled>
     <label for="plant-select">Choose a plant</label>
     <!-- <label for="plants">Please select an option</label> -->
-    <select name="plants" id="plant-selection" required>
+    <select name="plants" id="plant-selection" disabled>
         <option value=""  selected disabled hidden>--Please select an option--</option>
         {%  for item in plant_type_list  %}
         <option value="{{  item['ID']  }}" >  {{item['name']}}  </option>
@@ -100,6 +122,6 @@
     <button type="submit">Submit</button>
     </form>
 <br>
-
+{%  endif  %}
 
 {% endblock %}
