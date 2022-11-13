@@ -1,16 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div class="content">
 
+    <h2>WORKING</h2>
+    <!-- getting data from the database and displaying it fully on the page -->
+    <h1>
+        {{  plant_name[0]  }}
+    </h1>
 
+    {# <!-- <img src="{{url_for('static', filename={{  image_location  }})}}" /> --> #}
 
-<h1>
-    {{  title[0]  }}
-</h1>
-
-
-
-<p>
-    {{  content[0]  }}
-</p>
-
+    <p>
+        {{  content[0]  }}
+    </p>
+</div>
 {%  endblock %}

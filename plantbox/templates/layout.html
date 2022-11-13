@@ -5,36 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Plant Box</title>
+    <!-- stylesheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Caveat">
+    <!-- Favicon location -->
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
+
+    
 </head>
 <body>
-    <!-- Hamburger menu in NavBar links  https://codepen.io/alvarotrigo/pen/MWEJEWG?editors=1100
-    https://alvarotrigo.com/blog/hamburger-menu-css/ 
-
--->
-<nav class="navbar navbar-expand-lg bg-light">
+<!-- navbar -->
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="/static/images/Logo.png" style="width:100px;"></a>
+      {%  if 'name' in session:  %}
+      <h3 class="navbar-greeting">Hello {{  session['name']  }}</h3>
+      {%  else:  %}
+      <h3 class="navbar-greeting"> You are currently not signed in </h3>
+      {%  endif  %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          {%  if active_link == 0:  %}
-          <a class="active-nav-link" href="/">Home</a>
-          {%  else:  %}
           <a class="nav-link" href="/">Home</a> 
-          {%  endif  %}
           <a class="nav-link" href="/portfolio">User Portfolio</a>
           <a class="nav-link" href="/about">About us          </a>
           <a class="nav-link" href="/login"> login/signup     </a>
+          {%  if 'name' in session:  %}
           <a class="nav-link" href="/logout"> log out         </a>
-
+          {%  endif  %}
         </div>
       </div>
     </div>
@@ -44,12 +49,12 @@
         {% block content %}
         {% endblock %}
     </div>
-    <!-- <footer>
+    <footer>
         <p>
-        Favicon from https://www.freeiconspng.com/img/34788
-        Image by <a href="https://pixabay.com/users/congerdesign-509903/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">congerdesign</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">Pixabay</a>
+          Image from <a href="https://pixabay.com">pixabay</a>  
+        <!-- image <a href="https://pixabay.com/users/congerdesign-509903/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">congerdesign</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4036130">Pixabay</a> -->
         </p>
-    </footer> -->
+    </footer>
 </body>
 
 </html>
